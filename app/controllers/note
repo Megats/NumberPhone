@@ -1,0 +1,136 @@
+notes
+
+Task:
+
+Write an application using ruby on rails language which can Create, Read, Update and Delete user phone numbers. The apps must stored name & phone numbers (multiple phone numbers) using web based GUI.
+e.g:
+Amir Haris Ahmad has many phone numbers 0129522020, 01934567231 & 0355234445
+
+*Use activerecord relationship.
+
+Good luck 
+
+Thanks.
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+steps to start
+
+- gem install rails
+- make directory
+- create application (rails new blog)
+- cd blog
+- start the server (rails s)
+
+
+
+main functions:
+- The apps must stored name & phone numbers (multiple phone numbers)
+
+activerecord relationship
+
+model:- 1. User 2. Details
+
+1 user has many details
+details belong to user
+
+Model User
+- userid
+- username
+
+
+Model details
+- name
+- telephone number
+- userid
+
+
+sql
+- id is needed to grab specific details
+maksudnya: if nak amik semua number phone untuk that users.. i have to know the id of that users
+
+
+
+
+
+
+
+
+copy
+<%= @detail =%>
+    <%= render detail =%>
+    <p>&nbsp; 
+      <%= link_to "Show this detail", detail %>
+    </p>
+
+
+        @userid = params[:param1]
+    #@users = User.select("user_fullname").where(user_id: @userid)
+    @details = Detail.select("users.user_fullname,GROUP_CONCAT(phone_number) as phone_number, details.user_id")
+    .joins("LEFT JOIN users ON details.user_id = users.user_id")
+    #@users = User.joins(:details)
+    #@details = Detail.all
+    #.where("detail.user_id = ?", @userid)
+    #@user = User.joins(:details).where(details: {userid: @userid})
+    @owner = Detail.joins(:user).select('users.user_fullname').where("users.user_id = ?",@userid)
+    #@owner = Detail.joins(:user).select('users.user_fullname').where("users.user_id = ?",@userid)
+    @name  = Detail.joins(:user).select('users.user_fullname, details.phone_number').where("users.user_id = ?",@userid)
+    @length = @name.size
+    @owner = User.select('user_fullname').where("user_id = ?",@userid)
+
+      #params.require(:detail).permit(:name, :phone_number, :userid, :userid => [:userid])
+
+FORM
+
+
+<link rel="stylesheet" type="text/css" href="style.css">
+
+<%= form_with(model: detail) do |form| %>
+  <% if detail.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(detail.errors.count, "error") %> prohibited this detail from being saved:</h2>
+
+      <ul>
+        <% detail.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <% if form.new_record? # new %> 
+    <% form.inputs do %>
+    <div>
+      <%= form.label :phone_number, style: "display: block" %>
+      <%= form.text_field :phone_number %>
+    </div>
+    <% form.hidden_field :user_id, :value => @userid %>
+    <%= form.label :User_ID, style: "display: block" %>
+    <%= form.text_field :user_id %>
+      <div>
+      <%= form.label :Phone_Id, style: "display: block" %>
+      <%= form.text_field :phone_id %>
+    </div>
+  <br>
+    <div>
+      <%= form.submit %>
+    </div>
+    <% end %>
+  <% end %>
+
+      <% else #update %>
+          <% form.inputs do %>
+          <div>
+            <%= form.label :phone_number, style: "display: block" %>
+            <%= form.text_field :phone_number %>
+          </div>
+            <%= form.label :Phone_Id, style: "display: block" %>
+            <%= form.text_field :phone_id %>
+          </div>
+        <br>
+
+          <div>
+            <%= form.submit %>
+          </div>
+          <% end %>
+      <% end %>
+<% end %>

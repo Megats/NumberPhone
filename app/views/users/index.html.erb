@@ -1,0 +1,22 @@
+<p style="color: green"><%= notice %></p>
+
+<h2>List of User</h2>
+  <table class="table"><tr>
+  <th scope="col">Userid</th>
+  <th scope="col">Name</th>
+  <th scope="col">Action</th>
+
+  </tr>
+<div id="users">
+  <% @users.each do |user| %>
+      <tbody><tr>
+    <th scope="row"><%= user.user_id %></th>
+    <th scope="row"><%= user.user_fullname %></th>
+    <th scope="row"><%= link_to "Show this user", user %></th>
+  </tr>
+    <p>
+    </p>
+  <% end %>
+</div>
+</table>
+<%= link_to "New user", new_user_path %>

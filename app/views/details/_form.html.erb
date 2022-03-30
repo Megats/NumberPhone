@@ -1,0 +1,54 @@
+<link rel="stylesheet" type="text/css" href="style.css">
+
+<%= form_with(model: detail) do |form| %>
+  <% if @detail.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(detail.errors.count, "error") %> prohibited this detail from being saved:</h2>
+
+      <ul>
+        <% @detail.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if detail.new_record? %>
+
+  <div>
+    User ID : <%= @userid %> <br>
+    <%= form.hidden_field :user_id, value: @userid %>
+
+    <%= form.label :Phone_Id, style: "display: block" %>
+    <%= form.text_field :phone_id %>
+  </div>
+    <%= form.label :phone_number, style: "display: block" %>
+    <%= form.text_field :phone_number %>
+    <div>
+  </div>
+
+  <% else %>
+
+    <% @phones.each do |detail| %>
+
+    Phone id is <%= detail.phone_id %>
+    <%= form.label :phone_number %>:
+    <%= form.text_field :phone_number %>
+    <%= link_to 'Delete', detail_path(detail.phone_id), method: :delete %>
+    <br>
+
+    <br><br>
+
+    <% end %>
+
+  </div>
+  <div>
+
+    <% end %>
+<br>
+<br>
+  <div>
+    <%= form.submit  %>  
+
+  </div>
+<% end %>

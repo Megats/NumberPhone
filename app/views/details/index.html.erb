@@ -1,0 +1,31 @@
+
+
+<p style="color: green"><%= notice %></p>
+
+<h1>Details</h1>
+<br>
+<div id="details">
+<% owner = @owner.first %> 
+<%= owner.user_fullname %>
+
+<%= "has phone number" unless @length < 1   %>  
+
+<%= "has many phone number" unless @length < 2  %>  
+
+<% @name.each do |detail| %>
+      
+    <%= detail.phone_number %>
+      <%= "," unless detail == @name.last %>      
+      <%= "and" if detail == @name.second_to_last %>
+
+  <% end %>
+</div>
+<br>
+
+<%= link_to "Add number", new_detail_path(:param2 =>@userid ) %>
+
+<% if @phones.exists? %>
+|
+<%= link_to "Edit this detail", edit_detail_path(:id =>@userid) %> <br>
+
+<% end %>
