@@ -1,12 +1,14 @@
 <p style="color: green"><%= notice %></p>
 
 <h2>List of User</h2>
-  <table class="table"><tr>
+
+<table class="table table-bordered">
+<thead><tr>
   <th scope="col">Userid</th>
   <th scope="col">Name</th>
   <th scope="col">Action</th>
-
-  </tr>
+</tr>
+</thead>
 <div id="users">
   <% @users.each do |user| %>
       <tbody><tr>

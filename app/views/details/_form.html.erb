@@ -14,9 +14,9 @@
   <% end %>
 
   <% if detail.new_record? %>
-
-  <div>
-    User ID : <%= @userid %> <br>
+  User ID: <%= @userid %>
+  <div class="container">
+    <div class="form-group">
     <%= form.hidden_field :user_id, value: @userid %>
 
     <%= form.label :Phone_Id, style: "display: block" %>
@@ -25,30 +25,47 @@
     <%= form.label :phone_number, style: "display: block" %>
     <%= form.text_field :phone_number %>
     <div>
-  </div>
+  </div><br>
+<%= form.submit "Add Number", class:'btn btn-primary' %>
 
+</div>
   <% else %>
-
+<% count = 1 %>
+<div class="container">
+    <table class="table">
+    <thead>
+    <tr>
+       <th scope="col">#</th>
+       <th scope="col">Phone Number</th>
+       <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
     <% @phones.each do |detail| %>
 
-    Phone id is <%= detail.phone_id %>
-    <%= form.label :phone_number %>:
-    <%= form.text_field :phone_number %>
-    <%= link_to 'Delete', detail_path(detail.phone_id), method: :delete %>
-    <br>
+    <tr>
+    <% phonenum = detail.phone_number %>
+    <%= form.hidden_field :phone_id, value: detail.phone_id %>
+    <%= form.hidden_field :user_id, value: detail.user_id %>
 
-    <br><br>
-
+    <th scope="row"><%= count %>)</th>
+    <% count = count + 1 %>
+    <td> <%= phonenum %> </td>
+    <td> <%= link_to 'Edit', detail_path(detail.phone_id) %> </td></tr></tr>
+    
     <% end %>
-
+    </tbody>
+  </table>
+</div>
   </div>
   <div>
-
+    &nbsp;<%= link_to "Back to details", details_path(:param1 =>  @userid ) %>
     <% end %>
 <br>
 <br>
   <div>
-    <%= form.submit  %>  
+      
 
   </div>
 <% end %>
+

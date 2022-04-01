@@ -1,10 +1,24 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @detail %>
-User ID is
+<%= render @number %>
+<h1>Editing Detail</h1>
+
+<%= form_with(model: @number) do |f| %>
+
+<div class="container">
+<center>
+<%= f.hidden_field :phone_id, value: @number.phone_id %>
+<%= f.hidden_field :user_id, value: @number.user_id %>
+<p>Phone Number: <%= f.text_field :phone_number %>
+<%= f.submit class:'btn btn-primary' %>
+</p>
+<% end %>
+<center>OR</center><br>
+<%= button_to "Delete this number", @number, method: :delete, class:"btn btn-danger" %>
+</div>
+<br><br>
+<%= link_to "Back to details", details_path(:param1 =>  @number.user_id )  %> 
 
 &nbsp;  
-<%= link_to "Edit this detail", edit_detail_path(@detail) %> <br>
-<%= link_to "Back to details", details_path %> 
- 
+   
 

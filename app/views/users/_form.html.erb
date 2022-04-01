@@ -10,19 +10,34 @@
       </ul>
     </div>
   <% end %>
-
-  <div>
-    <%= form.label :userid, style: "display: block" %>
-    <%= form.text_field :user_id %>
-  </div>
+<% if user.new_record? %>
+<center>
+  <div class="container">
+    <div class="form-group">
+      <label for="exampleInputEmail1">User ID</label><br>
+      <%= form.text_field :user_id %>
+    </div>
 
   <div>
     <%= form.label :Fullname, style: "display: block" %>
     <%= form.text_field :user_fullname %>
   </div>
 <br>
+<% else %>
+<center>
+  <div class="container">
+    <div class="form-group">
+      <%= form.hidden_field :user_id, value: user.user_id %>
 
   <div>
-    <%= form.submit %>
+    <%= form.label :Fullname, style: "display: block" %>
+    <%= form.text_field :user_fullname, :size=>"30" %>
   </div>
+<br>
+<% end %>
+  <div>
+    <%= form.submit  class:'btn btn-primary' %>
+</div>
+  </div>
+</center>
 <% end %>

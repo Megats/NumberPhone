@@ -1,20 +1,20 @@
 
 
 <p style="color: green"><%= notice %></p>
-
 <h1>Details</h1>
 <br>
-<div id="details">
+<div id="details"><h4>
 <% owner = @owner.first %> 
 <%= owner.user_fullname %>
 
-<%= "has phone number" unless @length < 1   %>  
+<%= "has phone number" unless @length > 1 || @length < 1  %>  
 
-<%= "has many phone number" unless @length < 2  %>  
+<%= "has many phone number" unless @length <= 1  %>  
 
 <% @name.each do |detail| %>
       
-    <%= detail.phone_number %>
+    <!-- <%= @name.map{|detail| detail.phone_number}.join(", ") %> -->
+      <%= detail.phone_number %>
       <%= "," unless detail == @name.last %>      
       <%= "and" if detail == @name.second_to_last %>
 
@@ -22,10 +22,9 @@
 </div>
 <br>
 
-<%= link_to "Add number", new_detail_path(:param2 =>@userid ) %>
+<%= link_to "Add number", new_detail_path(:param2 =>@userid ) %> | 
 
 <% if @phones.exists? %>
-|
 <%= link_to "Edit this detail", edit_detail_path(:id =>@userid) %> <br>
 
 <% end %>

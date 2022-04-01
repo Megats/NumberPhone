@@ -1,8 +1,12 @@
-<br><br> <center><h4> Please enter details</h4>
+<br><br>
+<div class="container">
+<center><h4> Please enter details</h4>
 
 <%= render "form" ,detail: @detail %>
 <br>
+<div class="container">
 
 <div>
-  <%= link_to "Back to details", details_path %>
+
+  <%= link_to "Back to details", details_path(:param1 =>  @userid ) %>
 </div>

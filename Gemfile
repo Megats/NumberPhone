@@ -40,7 +40,7 @@ gem 'rb-readline', '~> 0.4.2'
 # gem "bcrypt", "~> 3.1.7"
 
 #Add this
-gem 'tzinfo-data', '1.2014.5'
+gem 'tzinfo-data'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 #gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
@@ -79,3 +79,5 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+gem "tailwindcss-rails", "~> 2.0"
